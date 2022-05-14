@@ -4,9 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Safa/StudioProjects/airties_tekrar/ToDoApp/app/src/main/res/layout/activity_main.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Safa/StudioProjects/airties_tekrar/ToDoApp/app/src/main/res/layout/card_tasarim.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/Safa/StudioProjects/airties_tekrar/ToDoApp/app/src/main/res/layout/fragment_anasayfa.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/Safa/StudioProjects/airties_tekrar/ToDoApp/app/src/main/res/layout/fragment_is_detay.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/Safa/StudioProjects/airties_tekrar/ToDoApp/app/src/main/res/layout/fragment_is_kayit.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Safa/StudioProjects/airties_tekrar/ToDoApp/app/src/main/res/menu/toolbar_menu.xml" value="0.5541666666666667" />
       </map>
     </option>
   </component>
