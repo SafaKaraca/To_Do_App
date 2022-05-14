@@ -5,9 +5,12 @@ import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.appcompat.widget.SearchView
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.safakaraca.todoapp.R
+import com.safakaraca.todoapp.adapter.IslerAdapter
 import com.safakaraca.todoapp.databinding.FragmentAnasayfaBinding
 import com.safakaraca.todoapp.entity.Isler
 
@@ -23,17 +26,25 @@ class AnasayfaFragment : Fragment(),SearchView.OnQueryTextListener {
         tasarim.toolbarAnasayfa.title = "Yapılacaklar"
         (activity as AppCompatActivity).setSupportActionBar(tasarim.toolbarAnasayfa)
 
+        tasarim.rv.layoutManager = LinearLayoutManager(requireContext())
+
+        val islerListesi = ArrayList<Isler>()
+
+        val k1 = Isler(1,"Kitap Oku")
+        val k2 = Isler(2,"Yemek Ye")
+        val k3 = Isler(3,"Kotlin Çalış")
+        islerListesi.add(k1)
+        islerListesi.add(k2)
+        islerListesi.add(k3)
+
+        val adapter = IslerAdapter(requireContext(),islerListesi)
+        tasarim.rv.adapter = adapter
+
+
+
         tasarim.fab.setOnClickListener {
             Navigation.findNavController(it).navigate(R.id.isKayitGecis)
         }
-
-        tasarim.buttonDetay.setOnClickListener {
-            val is_nesne = Isler(1,"iş yap")
-            val gecis = AnasayfaFragmentDirections.isDetayGecis(is_nesne)
-            Navigation.findNavController(it).navigate(gecis)
-        }
-
-
 
         return tasarim.root
     }
