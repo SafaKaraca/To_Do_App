@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModel
 import com.safakaraca.todoapp.R
 import com.safakaraca.todoapp.databinding.FragmentIsDetayBinding
 import com.safakaraca.todoapp.databinding.FragmentIsKayitBinding
@@ -16,21 +18,14 @@ class IsKayitFragment : Fragment() {
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        tasarim = FragmentIsKayitBinding.inflate(inflater, container, false)
+        tasarim = DataBindingUtil.inflate(inflater,R.layout.fragment_is_kayit, container, false)
+        tasarim.isKayitFragment = this
 
-
-        tasarim.toolbarIsKayit.title = "İş Kayıt"
-
-        tasarim.buttonKaydet.setOnClickListener {
-            val yapılacak_is = tasarim.editTextYapilacakIs.text.toString()
-
-            kayit(yapılacak_is)
-        }
-
+        tasarim.isKayitToolbarBaslik = "İş Kayıt"
         return tasarim.root
     }
 
-    fun kayit(yapilacak_is:String){
+    fun buttonKaydetTikla(yapilacak_is:String){
         Log.e("İş Kayıt" ,"$yapilacak_is")
     }
 

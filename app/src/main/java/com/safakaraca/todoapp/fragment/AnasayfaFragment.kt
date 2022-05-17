@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.appcompat.widget.SearchView
+import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.safakaraca.todoapp.R
@@ -20,13 +21,12 @@ class AnasayfaFragment : Fragment(),SearchView.OnQueryTextListener {
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        tasarim = FragmentAnasayfaBinding.inflate(inflater, container, false)
+        tasarim = DataBindingUtil.inflate(inflater,R.layout.fragment_anasayfa, container, false)
+        tasarim.anasayfaFragment = this
 
 
-        tasarim.toolbarAnasayfa.title = "Yapılacaklar"
+        tasarim.anasayfaToolbarBaslik = "Yapılacaklar"
         (activity as AppCompatActivity).setSupportActionBar(tasarim.toolbarAnasayfa)
-
-        tasarim.rv.layoutManager = LinearLayoutManager(requireContext())
 
         val islerListesi = ArrayList<Isler>()
 
@@ -38,15 +38,15 @@ class AnasayfaFragment : Fragment(),SearchView.OnQueryTextListener {
         islerListesi.add(k3)
 
         val adapter = IslerAdapter(requireContext(),islerListesi)
-        tasarim.rv.adapter = adapter
+        tasarim.islerAdapter = adapter
 
-
-
-        tasarim.fab.setOnClickListener {
-            Navigation.findNavController(it).navigate(R.id.isKayitGecis)
-        }
 
         return tasarim.root
+    }
+
+    fun fabTikla(v:View){
+        Navigation.findNavController(v).navigate(R.id.isKayitGecis)
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
