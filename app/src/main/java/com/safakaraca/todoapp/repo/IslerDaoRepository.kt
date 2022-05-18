@@ -1,49 +1,61 @@
 package com.safakaraca.todoapp.repo
 
+import android.app.Application
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.safakaraca.todoapp.entity.Isler
+import com.safakaraca.todoapp.room.Veritabani
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import java.lang.Appendable
 
-class IslerDaoRepository {
+class IslerDaoRepository(var application: Application) {
 
     var islerListesi: MutableLiveData<List<Isler>>
+    var vt:Veritabani
 
     init {
         islerListesi = MutableLiveData()
+        vt = Veritabani.veritabaniErisim(application)!!
     }
 
     fun isleriGetir():MutableLiveData<List<Isler>>{
         return islerListesi
     }
 
-
     fun isKayit(yapilacak_is:String){
-        Log.e("İş Kayıt" ,"$yapilacak_is")
+        val job = CoroutineScope(Dispatchers.Main).launch {
+            val yeniIs = Isler(0,yapilacak_is)
+            vt.IslerDao().isEkle(yeniIs)
+        }
     }
 
     fun isGuncelle(yapilacak_id:Int,yapilacak_is:String){
-        Log.e("İş Güncelle" ,"$yapilacak_id - $yapilacak_is")
+        val job =  CoroutineScope(Dispatchers.Main).launch {
+            val guncellenenIs = Isler(yapilacak_id,yapilacak_is)
+            vt.IslerDao().isGuncelle(guncellenenIs)
+        }
     }
 
     fun isAra(aramaKelimesi:String){
-        Log.e("İş Ara",aramaKelimesi)
+        val job = CoroutineScope(Dispatchers.Main).launch {
+            islerListesi.value = vt.IslerDao().isArama(aramaKelimesi)
+        }
     }
 
     fun isSil(yapilacak_id:Int){
-        Log.e("İş sil",yapilacak_id.toString())
+        val job = CoroutineScope(Dispatchers.Main).launch {
+            val silinenIs = Isler(yapilacak_id,"")
+            vt.IslerDao().isSil(silinenIs)
+            tumIsleriAl()
+        }
     }
 
     fun tumIsleriAl(){
-
-        val liste = ArrayList<Isler>()
-
-        val k1 = Isler(1,"Kitap Oku")
-        val k2 = Isler(2,"Yemek Ye")
-        val k3 = Isler(3,"Kotlin Çalış")
-        liste.add(k1)
-        liste.add(k2)
-        liste.add(k3)
-        islerListesi.value = liste
+        val job = CoroutineScope(Dispatchers.Main).launch {
+            islerListesi.value = vt.IslerDao().tumIsler()
+        }
 
     }
 

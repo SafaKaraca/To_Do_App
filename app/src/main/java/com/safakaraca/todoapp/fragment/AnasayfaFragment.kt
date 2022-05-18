@@ -14,6 +14,7 @@ import com.safakaraca.todoapp.adapter.IslerAdapter
 import com.safakaraca.todoapp.databinding.FragmentAnasayfaBinding
 import com.safakaraca.todoapp.entity.Isler
 import com.safakaraca.todoapp.viewmodel.AnasayfaFragmentViewModel
+import com.safakaraca.todoapp.viewmodel.AnasayfaVMF
 
 class AnasayfaFragment : Fragment(),SearchView.OnQueryTextListener {
 
@@ -45,7 +46,10 @@ class AnasayfaFragment : Fragment(),SearchView.OnQueryTextListener {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
 
-        val tempViewModel : AnasayfaFragmentViewModel by viewModels()
+        val tempViewModel : AnasayfaFragmentViewModel by viewModels(){
+            AnasayfaVMF(requireActivity().application)
+
+        }
         viewModel = tempViewModel
     }
 
@@ -68,6 +72,11 @@ class AnasayfaFragment : Fragment(),SearchView.OnQueryTextListener {
         viewModel.ara(newText)
         return true
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.isleriYukle()
     }
 
 }

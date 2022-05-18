@@ -13,6 +13,7 @@ import com.safakaraca.todoapp.R
 import com.safakaraca.todoapp.databinding.FragmentIsDetayBinding
 import com.safakaraca.todoapp.databinding.FragmentIsKayitBinding
 import com.safakaraca.todoapp.viewmodel.IsKayitFragmentViewModel
+import com.safakaraca.todoapp.viewmodel.IsKayitVMF
 
 class IsKayitFragment : Fragment() {
 
@@ -31,7 +32,9 @@ class IsKayitFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val tempViewModel:IsKayitFragmentViewModel by viewModels()
+        val tempViewModel:IsKayitFragmentViewModel by viewModels(){
+            IsKayitVMF(requireActivity().application)
+        }
         viewModel = tempViewModel
     }
 

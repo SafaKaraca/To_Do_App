@@ -1,13 +1,15 @@
 package com.safakaraca.todoapp.viewmodel
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.safakaraca.todoapp.entity.Isler
 import com.safakaraca.todoapp.repo.IslerDaoRepository
 
-class AnasayfaFragmentViewModel:ViewModel() {
+class AnasayfaFragmentViewModel(application: Application) : AndroidViewModel(application) {
 
-    val krepo = IslerDaoRepository()
+    val krepo = IslerDaoRepository(application)
 
     var islerListesi = MutableLiveData<List<Isler>>()
 

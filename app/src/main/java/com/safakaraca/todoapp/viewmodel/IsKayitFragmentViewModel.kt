@@ -1,11 +1,13 @@
 package com.safakaraca.todoapp.viewmodel
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import com.safakaraca.todoapp.repo.IslerDaoRepository
 
-class IsKayitFragmentViewModel :ViewModel() {
+class IsKayitFragmentViewModel(application: Application) : AndroidViewModel(application) {
 
-    val krepo = IslerDaoRepository()
+    val krepo = IslerDaoRepository(application)
 
     fun kayit(yapilacak_is:String){
         krepo.isKayit(yapilacak_is)

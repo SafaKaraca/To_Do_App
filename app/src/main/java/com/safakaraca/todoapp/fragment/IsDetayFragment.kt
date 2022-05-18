@@ -12,6 +12,7 @@ import androidx.navigation.fragment.navArgs
 import com.safakaraca.todoapp.R
 import com.safakaraca.todoapp.databinding.FragmentIsDetayBinding
 import com.safakaraca.todoapp.viewmodel.IsDetayFragmentViewModel
+import com.safakaraca.todoapp.viewmodel.IsDetayVMF
 
 class IsDetayFragment : Fragment() {
 
@@ -35,7 +36,9 @@ class IsDetayFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val tempViewModel:IsDetayFragmentViewModel by viewModels()
+        val tempViewModel:IsDetayFragmentViewModel by viewModels(){
+            IsDetayVMF(requireActivity().application)
+        }
         viewModel = tempViewModel
     }
 
