@@ -7,14 +7,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import com.safakaraca.todoapp.R
 import com.safakaraca.todoapp.databinding.FragmentIsDetayBinding
 import com.safakaraca.todoapp.databinding.FragmentIsKayitBinding
+import com.safakaraca.todoapp.viewmodel.IsKayitFragmentViewModel
 
 class IsKayitFragment : Fragment() {
 
     private lateinit var tasarim: FragmentIsKayitBinding
+    private lateinit var viewModel: IsKayitFragmentViewModel
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -25,8 +28,15 @@ class IsKayitFragment : Fragment() {
         return tasarim.root
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        val tempViewModel:IsKayitFragmentViewModel by viewModels()
+        viewModel = tempViewModel
+    }
+
     fun buttonKaydetTikla(yapilacak_is:String){
-        Log.e("İş Kayıt" ,"$yapilacak_is")
+        viewModel.kayit(yapilacak_is)
     }
 
 }

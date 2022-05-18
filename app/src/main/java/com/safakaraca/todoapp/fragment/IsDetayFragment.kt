@@ -7,13 +7,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.safakaraca.todoapp.R
 import com.safakaraca.todoapp.databinding.FragmentIsDetayBinding
+import com.safakaraca.todoapp.viewmodel.IsDetayFragmentViewModel
 
 class IsDetayFragment : Fragment() {
 
     private lateinit var tasarim:FragmentIsDetayBinding
+    private lateinit var viewModel:IsDetayFragmentViewModel
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -29,8 +32,15 @@ class IsDetayFragment : Fragment() {
         return tasarim.root
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        val tempViewModel:IsDetayFragmentViewModel by viewModels()
+        viewModel = tempViewModel
+    }
+
     fun buttonGuncelle(yapilacak_id:Int,yapilacak_is:String){
-        Log.e("İş Güncelle","$yapilacak_id - $yapilacak_is")
+        viewModel.guncelle(yapilacak_id,yapilacak_is)
 
     }
 

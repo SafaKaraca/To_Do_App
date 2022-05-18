@@ -5,19 +5,20 @@ import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.safakaraca.todoapp.R
 import com.safakaraca.todoapp.adapter.IslerAdapter
 import com.safakaraca.todoapp.databinding.FragmentAnasayfaBinding
 import com.safakaraca.todoapp.entity.Isler
+import com.safakaraca.todoapp.viewmodel.AnasayfaFragmentViewModel
 
 class AnasayfaFragment : Fragment(),SearchView.OnQueryTextListener {
 
     private lateinit var tasarim: FragmentAnasayfaBinding
+    private lateinit var viewModel: AnasayfaFragmentViewModel
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -37,7 +38,7 @@ class AnasayfaFragment : Fragment(),SearchView.OnQueryTextListener {
         islerListesi.add(k2)
         islerListesi.add(k3)
 
-        val adapter = IslerAdapter(requireContext(),islerListesi)
+        val adapter = IslerAdapter(requireContext(),islerListesi,viewModel)
         tasarim.islerAdapter = adapter
 
 
@@ -52,6 +53,9 @@ class AnasayfaFragment : Fragment(),SearchView.OnQueryTextListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+
+        val tempViewModel : AnasayfaFragmentViewModel by viewModels()
+        viewModel = tempViewModel
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -65,19 +69,14 @@ class AnasayfaFragment : Fragment(),SearchView.OnQueryTextListener {
     }
 
     override fun onQueryTextSubmit(query: String): Boolean {
-        ara(query)
+        viewModel.ara(query)
         return true
     }
 
     override fun onQueryTextChange(newText: String): Boolean {
-        ara(newText)
+        viewModel.ara(newText)
         return true
 
     }
-
-    fun ara(aramaKelimesi:String){
-        Log.e("İş ara", aramaKelimesi)
-    }
-
 
 }
