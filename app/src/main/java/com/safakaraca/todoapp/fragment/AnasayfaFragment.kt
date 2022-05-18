@@ -29,19 +29,10 @@ class AnasayfaFragment : Fragment(),SearchView.OnQueryTextListener {
         tasarim.anasayfaToolbarBaslik = "Yapılacaklar"
         (activity as AppCompatActivity).setSupportActionBar(tasarim.toolbarAnasayfa)
 
-        val islerListesi = ArrayList<Isler>()
-
-        val k1 = Isler(1,"Kitap Oku")
-        val k2 = Isler(2,"Yemek Ye")
-        val k3 = Isler(3,"Kotlin Çalış")
-        islerListesi.add(k1)
-        islerListesi.add(k2)
-        islerListesi.add(k3)
-
-        val adapter = IslerAdapter(requireContext(),islerListesi,viewModel)
-        tasarim.islerAdapter = adapter
-
-
+        viewModel.islerListesi.observe(viewLifecycleOwner,{
+            val adapter = IslerAdapter(requireContext(),it,viewModel)
+            tasarim.islerAdapter = adapter
+        })
         return tasarim.root
     }
 

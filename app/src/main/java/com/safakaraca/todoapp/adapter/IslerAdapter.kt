@@ -15,7 +15,9 @@ import com.safakaraca.todoapp.entity.Isler
 import com.safakaraca.todoapp.fragment.AnasayfaFragmentDirections
 import com.safakaraca.todoapp.viewmodel.AnasayfaFragmentViewModel
 
-class IslerAdapter(var mContext:Context,var islerListesi:List<Isler>,var viewModel:AnasayfaFragmentViewModel)
+class IslerAdapter(var mContext:Context,
+                   var islerListesi:List<Isler>,
+                   var viewModel:AnasayfaFragmentViewModel)
     : RecyclerView.Adapter<IslerAdapter.CardTasarimTutucu>(){
     inner class CardTasarimTutucu(tasarim:CardTasarimBinding) : RecyclerView.ViewHolder(tasarim.root){
         var tasarim:CardTasarimBinding
